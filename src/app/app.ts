@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
+import {WorkoutComponent} from './workout-component/workout-component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [WorkoutComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

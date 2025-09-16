@@ -1,0 +1,113 @@
+<div class="workout-container">
+  @if (!workoutState.isActive && !workoutState.isFinished) {
+    <div class="phase-selection">
+      <h2>Choisir une phase d'entraînement</h2>
+      <div class="phases-grid">
+        @for (phase of exercisePhases; track phase.phase) {
+          <div
+            class="phase-card"
+            (click)="selectPhase(phase)"
+            (keydown)="selectedPhase(phase)"
+            [class.selected]="selectedPhase?.phase === phase.phase"
+          >
+            <div class="phase-number">Phase {{ phase.phase }}</div>
+            <h3>{{ phase.name }}</h3>
+            <div class="exercise-count">{{ phase.exercises.length }} exercices</div>
+            <div class="time-estimate">
+              <i class="far fa-clock"></i>
+              {{ calculatePhaseTime(phase) }} min
+            </div>
+          </div>
+        }
+      </div>
+      <button
+        class="btn btn-primary start-btn"
+        [disabled]="!selectedPhase"
+        (click)="startWorkout()"
+      >
+        🚀 Lancer l'entraînement
+      </button>
+    </div>
+  }
+
+  @if (workoutState.isActive && !workoutState.isFinished) {
+    <div class="active-workout">
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [style.width.%]="getProgressPercentage()"
+          ></div>
+        </div>
+        <div class="progress-text">
+          Exercice {{ workoutState.currentExerciseIndex + 1 }} / {{ currentPhase?.exercises?.length }}
+        </div>
+      </div>
+
+      <div class="exercise-info">
+        <h2 class="exercise-name">{{ getCurrentExercise()?.name }}</h2>
+        @if (getCurrentExercise()?.description) {
+          <p class="exercise-description">
+            {{ getCurrentExercise()?.description }}
+          </p>
+        }
+
+        <div class="exercise-stats">
+          <div class="stat">
+            <span class="stat-label">Série</span>
+            <span class="stat-value">{{ workoutState.currentSet }} / {{ getCurrentExercise()?.sets }}</span>
+          </div>
+          @if (getCurrentExercise()?.reps) {
+            <div class="stat">
+              <span class="stat-label">Répétition</span>
+              <span class="stat-value">{{ workoutState.currentRep }} / {{ getCurrentExercise()?.reps }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (!workoutState.waitingForUser) {
+        <div class="timer-display">
+          <div class="timer-circle">
+            <span class="timer-value">{{ timerSeconds }}</span>
+          </div>
+          <div class="timer-label">{{ getTimerLabel() }}</div>
+        </div>
+      }
+
+      @if (workoutState.waitingForUser) {
+        <div class="controls">
+          <button class="btn btn-success" (click)="completeRep()">
+            ✅ Répétition terminée
+          </button>
+          @if (canCompleteSet()) {
+            <button class="btn btn-primary" (click)="completeSet()">
+              🏁 Set terminé
+            </button>
+          }
+        </div>
+      }
+
+      <div class="status-display">
+        <div class="status-message">{{ getStatusMessage() }}</div>
+      </div>
+
+      <div class="emergency-controls">
+        <button class="btn btn-warning" (click)="pauseWorkout()">⏸️ Pause</button>
+        <button class="btn btn-danger" (click)="stopWorkout()">🛑 Arrêter</button>
+      </div>
+    </div>
+  }
+
+  @if (workoutState.isFinished) {
+    <div class="workout-completed">
+      <div class="completion-card">
+        <h2>🎉 Entraînement terminé !</h2>
+        <p>Félicitations ! Vous avez terminé la phase {{ selectedPhase?.phase }} !</p>
+        <button class="btn btn-primary" (click)="resetWorkout()">
+          🔄 Nouvel entraînement
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,488 @@
+// Variables
+$primary-color: #4f46e5;
+$secondary-color: #10b981;
+$danger-color: #ef4444;
+$warning-color: #f59e0b;
+$dark-bg: #1f2937;
+$light-bg: #ffffff;
+$text-dark: #111827;
+$text-light: #ffffff;
+$border-color: #e5e7eb;
+$shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+$border-radius: 1rem;
+
+.workout-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+// Navigation Tabs
+.nav-tabs {
+  display: flex;
+  background: $light-bg;
+  border-radius: $border-radius $border-radius 0 0;
+  box-shadow: $shadow;
+  margin-bottom: 0;
+  overflow: hidden;
+
+  .tab-btn {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+
+    &:hover {
+      background: #f9fafb;
+      color: $primary-color;
+    }
+
+    &.active {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+      background: #eef2ff;
+    }
+  }
+}
+
+// Phase Selection
+.phase-selection {
+  background: $light-bg;
+  border-radius: 0 0 $border-radius $border-radius;
+  padding: 2rem;
+  box-shadow: $shadow;
+  text-align: center;
+
+  h2 {
+    color: $text-dark;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .phase-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px solid transparent;
+    border-radius: $border-radius;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color, $secondary-color);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+
+    &.selected {
+      border-color: $primary-color;
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+
+      &::before {
+        transform: scaleX(1);
+      }
+    }
+
+    .phase-number {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: $primary-color;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h3 {
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $text-dark;
+    }
+
+    .exercise-count {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+  }
+
+  .start-btn {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+    min-width: 200px;
+  }
+}
+
+// Active Workout
+.active-workout {
+  background: $light-bg;
+  border-radius: 0 0 $border-radius $border-radius;
+  padding: 2rem;
+  box-shadow: $shadow;
+}
+
+.progress-container {
+  margin-bottom: 2rem;
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, $primary-color, $secondary-color);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .progress-text {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+}
+
+.exercise-info {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .exercise-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text-dark;
+    margin-bottom: 0.5rem;
+  }
+
+  .exercise-description {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .exercise-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $primary-color;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+}
+
+.timer-display {
+  text-align: center;
+  margin: 3rem 0;
+
+  .timer-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 8px 25px -5px rgba(79, 70, 229, 0.3);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: $light-bg;
+    }
+
+    .timer-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: $primary-color;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .timer-label {
+    font-size: 1rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+
+  .btn {
+    min-width: 180px;
+  }
+}
+
+.status-display {
+  text-align: center;
+  margin: 1.5rem 0;
+
+  .status-message {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $primary-color;
+    padding: 1rem;
+    background: #eef2ff;
+    border-radius: 0.5rem;
+    border-left: 4px solid $primary-color;
+  }
+}
+
+.emergency-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $border-color;
+}
+
+// Workout Completed
+.workout-completed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  .completion-card {
+    background: $light-bg;
+    border-radius: $border-radius;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: $shadow;
+    max-width: 400px;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: $secondary-color;
+    }
+
+    p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Button Styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 0.5rem;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.btn-primary {
+    background: $primary-color;
+    color: $text-light;
+
+    &:hover:not(:disabled) {
+      background: darken($primary-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-success {
+    background: $secondary-color;
+    color: $text-light;
+
+    &:hover:not(:disabled) {
+      background: darken($secondary-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-warning {
+    background: $warning-color;
+    color: $text-light;
+
+    &:hover:not(:disabled) {
+      background: darken($warning-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-danger {
+    background: $danger-color;
+    color: $text-light;
+
+    &:hover:not(:disabled) {
+      background: darken($danger-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Settings
+.settings-container {
+  background: $light-bg;
+  border-radius: 0 0 $border-radius $border-radius;
+  padding: 2rem;
+  box-shadow: $shadow;
+
+  h2 {
+    color: $text-dark;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  h3 {
+    color: $text-dark;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .setting-group {
+    background: #f9fafb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid $primary-color;
+
+    .setting-item {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .setting-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        color: $text-dark;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          width: 1.25rem;
+          height: 1.25rem;
+          accent-color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .workout-container {
+    padding: 0 1rem;
+  }
+
+  .nav-tabs .tab-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .phase-selection, .active-workout, .settings-container {
+    padding: 1.5rem;
+  }
+
+  .phases-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-info .exercise-stats {
+    gap: 2rem;
+  }
+
+  .timer-display .timer-circle {
+    width: 120px;
+    height: 120px;
+
+    .timer-value {
+      font-size: 2rem;
+    }
+  }
+
+  .controls, .emergency-controls {
+    flex-direction: column;
+    align-items: center;
+
+    .btn {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+
+  .exercise-info .exercise-name {
+    font-size: 1.5rem;
+  }
+}

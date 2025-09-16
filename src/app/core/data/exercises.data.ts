@@ -4,7 +4,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
   {
     name: 'Activation douces',
     phase: 1,
-    restBetweenExercisesSeconds:120,
+    restBetweenExercisesSeconds:20,
     exercises: [
       {
         id: 'quad-sets',
