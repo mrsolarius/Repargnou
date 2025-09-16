@@ -1,0 +1,79 @@
+{
+  "configVersion": 1,
+  "timestamp": 1758053768974,
+  "index": "/Repargnou/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/Repargnou/favicon.ico",
+        "/Repargnou/index.html",
+        "/Repargnou/main-S6AIJQ3C.js",
+        "/Repargnou/manifest.webmanifest",
+        "/Repargnou/polyfills-5CFQRCPP.js",
+        "/Repargnou/styles-7TEUWL7H.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/Repargnou/icons/icon-128x128.png",
+        "/Repargnou/icons/icon-144x144.png",
+        "/Repargnou/icons/icon-152x152.png",
+        "/Repargnou/icons/icon-192x192.png",
+        "/Repargnou/icons/icon-384x384.png",
+        "/Repargnou/icons/icon-512x512.png",
+        "/Repargnou/icons/icon-72x72.png",
+        "/Repargnou/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/Repargnou/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/Repargnou/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/Repargnou/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/Repargnou/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/Repargnou/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/Repargnou/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/Repargnou/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/Repargnou/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/Repargnou/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/Repargnou/index.html": "bea77907c56d29cb8a9f8f0bdb9a465f38b5566b",
+    "/Repargnou/main-S6AIJQ3C.js": "728e7529fe40cc3e390e20f60bf7af7396620e3b",
+    "/Repargnou/manifest.webmanifest": "f9bb037f087835e2f800f01fe5edb8888fc39b2a",
+    "/Repargnou/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
+    "/Repargnou/styles-7TEUWL7H.css": "31715196568dd3b0a54d13da47139d1690ac3f6b"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
