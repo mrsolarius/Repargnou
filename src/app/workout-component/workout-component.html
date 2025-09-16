@@ -7,7 +7,6 @@
           <div
             class="phase-card"
             (click)="selectPhase(phase)"
-            (keydown)="selectedPhase(phase)"
             [class.selected]="selectedPhase?.phase === phase.phase"
           >
             <div class="phase-number">Phase {{ phase.phase }}</div>
