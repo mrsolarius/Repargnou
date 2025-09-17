@@ -5,6 +5,7 @@ $danger-color: #e53e3e; // Garde le rouge pour les alertes
 $warning-color: #d69e2e; // Ton naturel pour avertissements
 $dark-bg: #22543d; // Fond vert forêt foncé
 $light-bg: #f0fff4; // Vert clair (lumière)
+$dark-bg: #cffcd9; // Fond vert forêt foncé
 $text-dark: #1c4532; // Texte vert foncé
 $text-light: #ffffff; // Texte clair
 $border-color: #c6f6d5; // Vert doux pour les bordures
@@ -282,7 +283,7 @@ $border-radius: 0.5rem;
     font-weight: 600;
     color: $primary-color;
     padding: 1rem;
-    background: #eef2ff;
+    background: $dark-bg;
     border-radius: 0.5rem;
     border-left: 4px solid $primary-color;
   }
