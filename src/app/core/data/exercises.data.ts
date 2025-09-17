@@ -4,7 +4,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
   {
     name: 'Activation douces',
     phase: 1,
-    restBetweenExercisesSeconds:20,
+    restBetweenExercisesSeconds: 60,
     exercises: [
       {
         id: 'quad-sets',
@@ -39,7 +39,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         name: 'Pont fessier',
         phase: 1,
         sets: 3,
-        reps: 12,
+        reps: 15,
         restBetweenSetsSeconds: 60
       },
       {
@@ -47,8 +47,8 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         name: 'Leg Extensions (assis)',
         description: 'Assis sur une chaise, lever de jambe tenir la jambe tendue',
         phase: 1,
-        sets: 6,
-        reps: 30,
+        sets: 3,
+        reps: 10,
         perRepHoldSeconds: 10,
         restBetweenSetsSeconds: 45
       },
