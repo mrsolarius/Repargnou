@@ -7,7 +7,7 @@
 }
 
 .app-header {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 128, 0, 0.1);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
   box-shadow: $shadow;
@@ -27,6 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%)
 }
 
 // Responsive design

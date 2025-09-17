@@ -1,14 +1,14 @@
 // Variables
-$primary-color: #4f46e5;
-$secondary-color: #10b981;
-$danger-color: #ef4444;
-$warning-color: #f59e0b;
-$dark-bg: #1f2937;
-$light-bg: #f9fafb;
-$text-dark: #111827;
-$text-light: #ffffff;
-$border-color: #e5e7eb;
-$shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$primary-color: #2f855a; // Vert forêt
+$secondary-color: #68d391; // Vert doux
+$danger-color: #e53e3e; // Garde le rouge pour les alertes
+$warning-color: #d69e2e; // Ton naturel pour avertissements
+$dark-bg: #22543d; // Fond vert forêt foncé
+$light-bg: #f0fff4; // Vert clair (lumière)
+$text-dark: #1c4532; // Texte vert foncé
+$text-light: #ffffff; // Texte clair
+$border-color: #c6f6d5; // Vert doux pour les bordures
+$shadow: 0 4px 6px -1px rgba(0, 128, 0, 0.2); // Ombre verte
 $border-radius: 0.5rem;
 
 // Global styles
@@ -20,7 +20,7 @@ $border-radius: 0.5rem;
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #22543d 0%, #276749 100%);
   min-height: 100vh;
   color: $text-dark;
   overflow-x: hidden;

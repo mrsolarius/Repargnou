@@ -1,27 +1,28 @@
 // Variables
-$primary-color: #4f46e5;
-$secondary-color: #10b981;
-$danger-color: #ef4444;
-$warning-color: #f59e0b;
-$dark-bg: #1f2937;
-$light-bg: #ffffff;
-$text-dark: #111827;
-$text-light: #ffffff;
-$border-color: #e5e7eb;
-$shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-$border-radius: 1rem;
+$primary-color: #2f855a; // Vert forêt
+$secondary-color: #68d391; // Vert doux
+$danger-color: #e53e3e; // Garde le rouge pour les alertes
+$warning-color: #d69e2e; // Ton naturel pour avertissements
+$dark-bg: #22543d; // Fond vert forêt foncé
+$light-bg: #f0fff4; // Vert clair (lumière)
+$text-dark: #1c4532; // Texte vert foncé
+$text-light: #ffffff; // Texte clair
+$border-color: #c6f6d5; // Vert doux pour les bordures
+$shadow: 0 4px 6px -1px rgba(0, 128, 0, 0.2); // Ombre verte
+$border-radius: 0.5rem;
 
 .workout-container {
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+  border-radius: $border-radius;
 }
 
 // Navigation Tabs
 .nav-tabs {
   display: flex;
   background: $light-bg;
-  border-radius: $border-radius $border-radius 0 0;
+  border-radius: $border-radius;
   box-shadow: $shadow;
   margin-bottom: 0;
   overflow: hidden;
@@ -53,7 +54,7 @@ $border-radius: 1rem;
 // Phase Selection
 .phase-selection {
   background: $light-bg;
-  border-radius: 0 0 $border-radius $border-radius;
+  border-radius: $border-radius;
   padding: 2rem;
   box-shadow: $shadow;
   text-align: center;
@@ -73,7 +74,7 @@ $border-radius: 1rem;
   }
 
   .phase-card {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #c6f6d5 0%, #9ae6b4 100%);
     border: 2px solid transparent;
     border-radius: $border-radius;
     padding: 1.5rem;
@@ -105,7 +106,7 @@ $border-radius: 1rem;
 
     &.selected {
       border-color: $primary-color;
-      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+      background: radial-gradient(circle, #c6f6d5 0%, #9ae6b4 100%);
 
       &::before {
         transform: scaleX(1);
