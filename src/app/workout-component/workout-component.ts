@@ -327,4 +327,15 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     // Convertir en minutes et arrondir à l'entier supérieur
     return Math.ceil(totalTimeSeconds / 60);
   }
+
+  completeSetImmediately(): void {
+    if (this.workoutState.isActive && !this.workoutState.isFinished) {
+      // Passer immédiatement au set suivant
+      this.completeSet();
+    }
+  }
+
+  isTimerActive(): boolean {
+    return !this.workoutState.waitingForUser; // Retourne false si l'utilisateur peut contrôler manuellement
+  }
 }

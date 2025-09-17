@@ -84,6 +84,12 @@
               🏁 Set terminé
             </button>
           }
+          @if (!isTimerActive()) {
+            <button class="btn btn-warning" (click)="completeSetImmediately()">
+              ⏩ Terminer le set immédiatement
+            </button>
+          }
+
         </div>
       }
 
