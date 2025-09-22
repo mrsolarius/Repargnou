@@ -23,14 +23,14 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         phase: 1,
         sets: 3,
         reps: 12,
-        perRepHoldSeconds: 5,
+        perRepHoldSeconds: 7,
         restBetweenSetsSeconds: 60
       },
       {
         id: 'clamshell',
         name: 'Clamshell (fessiers)',
         phase: 1,
-        sets: 3,
+        sets: 4,
         reps: 15,
         restBetweenSetsSeconds: 60
       },
