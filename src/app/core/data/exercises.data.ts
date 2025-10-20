@@ -57,7 +57,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
   {
     name: 'Renforcement Fonctionel',
     phase: 2,
-    restBetweenExercisesSeconds:120,
+    restBetweenExercisesSeconds:60,
     exercises: [
       {
         id: 'straight-leg',
