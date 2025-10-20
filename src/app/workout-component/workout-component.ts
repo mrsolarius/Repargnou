@@ -31,7 +31,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   timerSeconds = 0;
 
   private timerSubscription?: Subscription;
-  private completeSubscription?: Subscription;
+  private wakeLockSentinel: any = null;
 
   workoutState: WorkoutState = {
     isActive: false,
@@ -57,15 +57,50 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       this.timerSeconds = seconds;
     });
 
-    this.completeSubscription = this.timerService.timerComplete$.subscribe(() => {
-      // C'est ici que l'événement est remonté et traité !
-      this.handleTimerComplete();
-    });
+
+    // Add event listener to reacquire wake lock when page becomes visible again
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+  }
+
+  private readonly handleVisibilityChange = () => {
+    if (document.visibilityState === 'visible' && this.workoutState.isActive) {
+      this.requestWakeLock().then(r => console.log('success wake lock after visibility change', r));
+    }
   }
 
   ngOnDestroy() {
     this.timerSubscription?.unsubscribe();
     this.timerService.stop();
+    this.releaseWakeLock();
+
+    // Remove event listener to prevent memory leaks
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+  }
+
+  private async requestWakeLock() {
+    if ('wakeLock' in navigator) {
+      try {
+        this.wakeLockSentinel = await navigator.wakeLock.request('screen');
+        console.log('Wake Lock is active');
+      } catch (err) {
+        console.error(`Failed to request Wake Lock: ${err}`);
+      }
+    } else {
+      console.warn('Wake Lock API not supported in this browser');
+    }
+  }
+
+  private releaseWakeLock() {
+    if (this.wakeLockSentinel) {
+      this.wakeLockSentinel.release()
+        .then(() => {
+          this.wakeLockSentinel = null;
+          console.log('Wake Lock released');
+        })
+        .catch((err: any) => {
+          console.error(`Failed to release Wake Lock: ${err}`);
+        });
+    }
   }
 
   selectPhase(phase: ExercisePhase) {
@@ -87,6 +122,9 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       waitingForUser: false,
       isFinished: false
     };
+
+    // Request wake lock to prevent screen from locking
+    this.requestWakeLock();
 
     // Start workout session tracking
     this.workoutService.startWorkoutSession(this.selectedPhase);
@@ -225,6 +263,9 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     this.timerService.stop();
     this.ttsService.speak('Entraînement terminé ! Félicitations !');
 
+    // Release wake lock when workout is completed
+    this.releaseWakeLock();
+
     // Complete workout session tracking
     this.workoutService.completeWorkoutSession();
   }
@@ -296,6 +337,10 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       waitingForUser: false,
       isFinished: false
     };
+
+    // Release wake lock when workout is reset
+    this.releaseWakeLock();
+
     this.selectedPhase = null;
     this.currentPhase = null;
   }
