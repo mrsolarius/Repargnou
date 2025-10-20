@@ -124,7 +124,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     };
 
     // Request wake lock to prevent screen from locking
-    this.requestWakeLock();
+    this.requestWakeLock().then(r => console.log('success wake lock after startWorkout', r));
 
     // Start workout session tracking
     this.workoutService.startWorkoutSession(this.selectedPhase);
