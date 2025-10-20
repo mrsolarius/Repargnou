@@ -66,7 +66,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         phase: 1,
         sets: 3,
         reps: 12,
-        perRepHoldSeconds: 5,
+        perRepHoldSeconds: 7,
         restBetweenSetsSeconds: 60
       },
       {
