@@ -60,19 +60,38 @@ export const ALL_EXERCISES: ExercisePhase[] = [
     restBetweenExercisesSeconds:120,
     exercises: [
       {
+        id: 'straight-leg',
+        name: 'Straight leg raises leste de 2kg',
+        description: 'Allongé, jambe tendue, soulève à 30° et maintiens 5 sec avec leste de 2kg',
+        phase: 1,
+        sets: 3,
+        reps: 12,
+        perRepHoldSeconds: 5,
+        restBetweenSetsSeconds: 60
+      },
+      {
+        id: 'clamshell',
+        name: 'Clamshell (fessiers)',
+        phase: 1,
+        sets: 4,
+        reps: 15,
+        restBetweenSetsSeconds: 60
+      },
+      {
+        id: 'bridge',
+        name: 'Pont fessier',
+        phase: 1,
+        sets: 3,
+        reps: 15,
+        perRepHoldSeconds: 7,
+        restBetweenSetsSeconds: 60
+      },
+      {
         id: 'mini-squats',
         name: 'Mini-squats (0–30° flexion)',
         phase: 2,
         sets: 3,
         reps: 12,
-        restBetweenSetsSeconds: 60
-      },
-      {
-        id: 'step-up',
-        name: 'Step-up',
-        phase: 2,
-        sets: 3,
-        reps: 10,
         restBetweenSetsSeconds: 60
       },
       {
@@ -83,15 +102,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         reps: 1,
         holdSeconds: 30,
         restBetweenSetsSeconds: 30
-      },
-      {
-        id: 'hamstring-swiss',
-        name: 'Ischio-jambiers avec swiss ball / serviette',
-        phase: 2,
-        sets: 3,
-        reps: 10,
-        restBetweenSetsSeconds: 60
-      },
+      }
     ]
   },
   {
