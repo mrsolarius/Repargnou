@@ -62,8 +62,8 @@ export const ALL_EXERCISES: ExercisePhase[] = [
       {
         id: 'straight-leg',
         name: 'Straight leg raises leste de 2kg',
-        description: 'Allongé, jambe tendue, soulève à 30° et maintiens 5 sec avec leste de 2kg',
-        phase: 1,
+        description: 'Allongé, jambe tendue, soulève à 30° et maintiens 7 sec avec leste de 2kg',
+        phase: 2,
         sets: 3,
         reps: 12,
         perRepHoldSeconds: 7,
@@ -72,7 +72,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
       {
         id: 'clamshell',
         name: 'Clamshell (fessiers)',
-        phase: 1,
+        phase: 2,
         sets: 4,
         reps: 15,
         restBetweenSetsSeconds: 60
@@ -80,7 +80,7 @@ export const ALL_EXERCISES: ExercisePhase[] = [
       {
         id: 'bridge',
         name: 'Pont fessier',
-        phase: 1,
+        phase: 2,
         sets: 3,
         reps: 15,
         perRepHoldSeconds: 7,
@@ -99,10 +99,10 @@ export const ALL_EXERCISES: ExercisePhase[] = [
         name: 'Équilibre sur une jambe',
         phase: 2,
         sets: 3,
-        reps: 1,
-        holdSeconds: 30,
-        restBetweenSetsSeconds: 30
-      }
+        reps: 2,
+        perRepHoldSeconds: 30,
+        restBetweenSetsSeconds: 20
+      },
     ]
   },
   {

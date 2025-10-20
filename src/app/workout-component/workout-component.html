@@ -4,7 +4,7 @@
       <h2>Choisir une phase d'entraînement</h2>
       <div class="phases-grid">
         @for (phase of exercisePhases; track phase.phase) {
-          <div
+          <button
             class="phase-card"
             (click)="selectPhase(phase)"
             [class.selected]="selectedPhase?.phase === phase.phase"
@@ -16,7 +16,7 @@
               <i class="far fa-clock"></i>
               {{ calculatePhaseTime(phase) }} min
             </div>
-          </div>
+          </button>
         }
       </div>
       <button
@@ -98,7 +98,11 @@
       </div>
 
       <div class="emergency-controls">
-        <button class="btn btn-warning" (click)="pauseWorkout()">⏸️ Pause</button>
+        @if (!workoutState.isPaused) {
+          <button class="btn btn-warning" (click)="pauseWorkout()">⏸️ Pause</button>
+        } @else {
+          <button class="btn btn-success" (click)="resumeWorkout()">▶️ Reprendre</button>
+        }
         <button class="btn btn-danger" (click)="stopWorkout()">🛑 Arrêter</button>
       </div>
     </div>

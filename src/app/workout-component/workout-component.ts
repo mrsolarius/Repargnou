@@ -16,6 +16,7 @@ interface WorkoutState {
   restType: 'between-sets' | 'between-exercises' | 'per-rep';
   waitingForUser: boolean;
   isFinished: boolean;
+  isPaused: boolean;
 }
 
 @Component({
@@ -43,7 +44,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     isResting: false,
     restType: 'between-exercises',
     waitingForUser: false,
-    isFinished: false
+    isFinished: false,
+    isPaused: false
   };
 
   constructor(
@@ -62,6 +64,16 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       // C'est ici que l'événement est remonté et traité !
       this.handleTimerComplete();
     });
+
+    // Add visibility change event listener to detect when app goes to background
+    document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+  }
+
+  private handleVisibilityChange() {
+    if (document.hidden && this.workoutState.isActive && !this.workoutState.isPaused) {
+      // App went to background, pause the workout
+      this.pauseWorkout();
+    }
   }
 
   ngOnDestroy() {
@@ -69,6 +81,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     this.completeSubscription?.unsubscribe();
     this.timerService.stop();
     this.releaseWakeLock();
+    // Remove visibility change event listener
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
   }
 
   private async requestWakeLock() {
@@ -114,7 +128,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       isResting: true,
       restType: 'between-exercises',
       waitingForUser: false,
-      isFinished: false
+      isFinished: false,
+      isPaused: false
     };
 
     // Request wake lock to prevent screen from locking
@@ -298,6 +313,9 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   }
 
   getStatusMessage(): string {
+    if (this.workoutState.isPaused) {
+      return 'Entraînement en pause';
+    }
     if (this.workoutState.isResting) {
       return `Repos - ${this.getTimerLabel()}`;
     }
@@ -308,8 +326,19 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   }
 
   pauseWorkout() {
-    this.timerService.stop();
+    this.timerService.pause();
+    this.releaseWakeLock();
+    this.workoutState.isPaused = true;
     this.ttsService.speak('Entraînement en pause');
+  }
+
+  resumeWorkout() {
+    this.requestWakeLock().then(() => {
+      console.log('success wake lock after resumeWorkout')
+      this.timerService.start();
+      this.workoutState.isPaused = false;
+      this.ttsService.speak('Reprise de l\'entraînement');
+    });
   }
 
   stopWorkout() {
@@ -329,7 +358,8 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       isResting: false,
       restType: 'between-exercises',
       waitingForUser: false,
-      isFinished: false
+      isFinished: false,
+      isPaused: false
     };
 
     // Release wake lock when workout is reset
