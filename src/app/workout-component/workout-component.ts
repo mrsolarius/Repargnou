@@ -31,6 +31,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   timerSeconds = 0;
 
   private timerSubscription?: Subscription;
+  private completeSubscription?: Subscription;
   private wakeLockSentinel: any = null;
 
   workoutState: WorkoutState = {
@@ -57,24 +58,17 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       this.timerSeconds = seconds;
     });
 
-
-    // Add event listener to reacquire wake lock when page becomes visible again
-    document.addEventListener('visibilitychange', this.handleVisibilityChange);
-  }
-
-  private readonly handleVisibilityChange = () => {
-    if (document.visibilityState === 'visible' && this.workoutState.isActive) {
-      this.requestWakeLock().then(r => console.log('success wake lock after visibility change', r));
-    }
+    this.completeSubscription = this.timerService.timerComplete$.subscribe(() => {
+      // C'est ici que l'événement est remonté et traité !
+      this.handleTimerComplete();
+    });
   }
 
   ngOnDestroy() {
     this.timerSubscription?.unsubscribe();
+    this.completeSubscription?.unsubscribe();
     this.timerService.stop();
     this.releaseWakeLock();
-
-    // Remove event listener to prevent memory leaks
-    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
   private async requestWakeLock() {
@@ -124,7 +118,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     };
 
     // Request wake lock to prevent screen from locking
-    this.requestWakeLock().then(r => console.log('success wake lock after startWorkout', r));
+    this.requestWakeLock().then(() => console.log('success wake lock after startWorkout'));
 
     // Start workout session tracking
     this.workoutService.startWorkoutSession(this.selectedPhase);
@@ -347,7 +341,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   calculatePhaseTime(phase: ExercisePhase): number {
     const totalTimeSeconds = phase.exercises.reduce((acc, exercise, index) => {
-      let exerciseTime = 0;
+      let exerciseTime: number;
 
       // Calculer le temps de l'exercice
       if (exercise.reps) {
